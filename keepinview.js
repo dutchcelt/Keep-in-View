@@ -72,9 +72,9 @@
                 
                 if(!options.customClass){ 
                     prepCSS(); 
-                    if (scrolledOutAt==="bottom"){
+                    if (scrolledOutAt==="bottom" && !options.fixed){
                         fixCSS(($(window).height()-$elem.outerHeight()-options.edgeOffset));
-                    } else if (scrolledOutAt==="top"){ 
+                    } else if (scrolledOutAt==="top" && !options.fixed){ 
                         fixCSS(options.edgeOffset);
                     } else if (options.fixed){ 
                         fixCSS(options.edgeOffset);
