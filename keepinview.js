@@ -40,7 +40,7 @@
             var prepCSS = function(){
                 $elem.css({ 
                     position: 'fixed',
-                    left:       offset.left-marginOffset+'px',
+                    left:       cssPosition.left-marginOffset+'px',
                     width:      w,
                     height:     h,
                     zIndex:     options.zindex
@@ -69,15 +69,14 @@
                 if ( ($(window).scrollTop())+options.edgeOffset > offset.top && !options.fixed) { 
                     scrolledOutAt = "top"; 
                 }; 
-                
                 if(!options.customClass){ 
-                    prepCSS(); 
-                    if (scrolledOutAt==="bottom" && !options.fixed){
+                    prepCSS();
+                    if (scrolledOutAt==="bottom"){
                         fixCSS(($(window).height()-$elem.outerHeight()-options.edgeOffset));
-                    } else if (scrolledOutAt==="top" && !options.fixed){ 
+                    } else if (scrolledOutAt==="top"){ 
                         fixCSS(options.edgeOffset);
                     } else if (options.fixed){ 
-                        fixCSS(options.edgeOffset);
+                        $elem.css({top:options.edgeOffset,left:offset.left});
                         $(window).unbind('resize scroll');
                     } else {
                         clearCSS();

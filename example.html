@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Lunatech Labs - Keep in View</title>
+        <style type="text/css">
+            body {
+                margin: 0;
+                padding: 0;
+                }
+            a { color: white; }
+            .site {
+                margin: 0 auto 0;
+                padding: 0 0 0;
+                width: 960px;
+                overflow: hidden;
+                }
+            .content {
+                padding: 0 0 2em;
+                }
+            header {
+                position: relative;
+                height: 130px;
+                overflow: visible;
+                }  
+            nav, footer { 
+                float: left;
+                margin: 0;
+                padding: 0 30px;
+                width: 900px;
+                color: white;
+                background: #333; 
+                }
+            footer p { 
+                margin: 0;
+                padding: 0; 
+                line-height: 2;
+                }
+            nav ul {
+                margin: 0;
+                padding: 0;
+                display: block;
+                }
+            nav li {
+                margin: 0;
+                padding: 0;
+                display: inline;
+                line-height: 2;
+                }
+            .logo {
+                font-size: 2em;
+                line-height: 3;
+                color: crimson;
+                }
+            .help {
+                position: absolute;
+                top: 0;
+                left: 930px;
+                padding: 0.3em 0;
+                width: 30px;
+                text-align: center;
+                color: white;
+                background: navy;
+                }
+        </style>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+        <script type="text/javascript" src="keepinview.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $(".help").each(function(){
+                   $(this).keepInView({fixed:true, zindex: 42, edgeOffset: 30});
+                });
+                $("nav, footer").each(function(){
+                    $(this).keepInView();
+                });
+            });
+            
+        </script>
+    </head>
+    <body>
+        <div class="site">
+            <header>
+                <div class="logo">Keep in View</div>
+                <nav>
+                
+                    <ul>
+                        <li class="active"><a href="example.html">Home</a></li>
+                        <li><a href="example">Nav item 1</a></li>
+                        <li><a href="example">Nav item 2</a></li>
+                        <li><a href="example">Nav item 3</a></li>
+                    </ul>
+                </nav>
+                <div class="help">?</div>
+            </header>
+            
+                    
+            <article class="content">
+                <h1>Too much text</h1>
+                <p><strong>Resize and scroll the window so that you can see the script keeping elements in view.</strong></p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <h2>And it just keep on going</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <h3>… and going and going</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </article>
+            
+            <footer>
+                <p> ut aliquitat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </footer>
+        </div>
+    </body>
+</html>
