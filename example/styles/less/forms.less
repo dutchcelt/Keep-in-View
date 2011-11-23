@@ -1,0 +1,122 @@
+/*  ###########################################################################
+    Author:     DutchCelt Design
+    ########################################################################### */
+
+
+/*  FORMS [WARNING! low specificity!]------------------------------------------ */
+
+    form {
+        padding: 0 0 @em/2 0;
+        max-width: 100%;  
+        }
+    fieldset {
+        padding: 0 0 @em/2 0;
+        }
+    label {
+        clear: left;
+        float: @label-orientation;
+        display: block;
+        padding-right: @block/2;
+        width: @label-width;
+        text-align: @label-text-orientation;
+        }
+    .input-text {   
+        border: 0 none transparent;
+        padding: @line/4 @block/8;
+        //line-height: @transport;
+        .box-shadow(0, @l, @l*3, @grey6, inset);
+        }
+    input[type=search],
+    input[type=url],
+    input[type=email],
+    input[type=url],
+    input[type=email],
+    input[type=password],
+    input[type=text]{
+        float: @label-orientation;
+        width: @text-input-width;
+        .input-text;
+        }
+    input[type=number],
+    input[type^=date],
+    input[type=time] {
+        float: @label-orientation;
+        width: @text-input-width*0.325;
+        .input-text;
+        }
+    input[type=checkbox],
+    input[type=radio]{
+        width: auto;
+        }
+    input[type=checkbox] + label {
+        float: none;
+        display: inline;
+        }
+    input[type="radio"] + label {
+        display:inline;
+        float:none;
+        }
+    select {
+        float: @label-orientation;
+        width: auto;
+        min-width: @text-input-width*0.655;
+        }
+    textarea {
+        float: @label-orientation;
+        width: @text-input-width;
+        .input-text;
+        }
+    input[type=checkbox] {
+        float: left;
+        }
+    div > div > input[type=radio],
+    div > div > input[type=checkbox] {
+        float: none;
+        display: inline;
+        }
+    fieldset > div {
+        padding-bottom: @line/1.5;
+        float: @label-orientation;
+        width: 100%;
+        }
+    fieldset > div > div {
+        float: @label-orientation;
+        width: @text-input-width;
+        }
+    div > div > label {
+        float: none;
+        display: inline;
+        }
+    input[type=button],
+    input[type=submit] {
+        width: auto;
+        }
+    select[multiple]{ 
+        width: @text-input-width*0.655;
+        }
+        
+    :invalid {
+        color: @error;
+        }
+    :valid {
+        color: @text-color;
+        }
+    :read-only{ border: 0; padding: 0; }
+    
+    
+    ::-webkit-validation-bubble {}
+    ::-webkit-validation-bubble-arrow-clipper {}
+    ::-webkit-validation-bubble-arrow {
+        margin-bottom: 0 - @line;
+        border: 0;
+        .box-shadow(0,0,0,0);
+        background: @error;
+        }
+    ::-webkit-validation-bubble-message {
+        padding: @line/4 @block/2;
+        .rounded-corners(@w);
+        border: 0;
+        .box-shadow(0,0,0,0);
+        color: @light-color;
+        background: @error;
+        }

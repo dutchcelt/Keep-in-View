@@ -1,0 +1,228 @@
+/*  ###########################################################################
+    Author:     Lunatech Research
+    ########################################################################### */
+    
+    
+//  LESS LIBRARY ##############################################################
+//  THESE ARE THE VARIABLES TO SKIN THIS PROJECT ##############################
+
+
+
+//  Base units that set overall proportions ------------------------------------
+
+    @view:                  1200;           // VIEWPORT target based on pixels
+    @w:                     @view / 100px;  // Smallest horizontal unit
+    @h:                     0.2em;          // Smallest vertical unit
+    @em:                    @h*7;           // Vertical space or leading
+    
+    @block:                 @w * 2;         // White space for paddings or margins
+    @text-block:            @view * 48%;    // alt: 52em; 
+    @max-width:             @view * 1px;    // alt: @w * 80 = 960
+    
+    @l:                     1px;            // Line or border
+    @rad:                   @w/3;           // Standard radius
+    
+    
+//  Font elements -------------------------------------------------------------
+    
+    @font-root:             "../fonts/";
+                            
+    @font-face {
+        font-family:        'OstrichBlack';
+        src:                url('@{font-root}ostrich-black-webfont.woff') format('woff');
+        font-weight:        normal;
+        font-style:         normal;
+        }
+    @font-face {
+        font-family:        'LobsterTwoBoldItalic';
+        src:                url('@{font-root}LobsterTwo-BoldItalic-webfont.woff') format('woff');
+        font-weight:        normal;
+        font-style:         normal;
+        }
+
+    @font-scale:            82.5%;          // Used on the body element
+    @transport:             1.6;            // For line height (no units!)
+    @line:                  @h*5;           // Interline: For web it's usually 1em
+    @typeface:              Arial, sans-serif;
+    @typeface-header:       "LobsterTwoBoldItalic", Georgia, serif;
+    @typeface-brand:        "OstrichBlack", Arial, sans-serif;
+    
+    
+//  Basic colour values -------------------------------------------------------
+
+    @light-color:           #ffffff;
+    @dark-color:            #222222;
+    @text-color:            #333333;
+    
+    
+//  Color sets ----------------------------------------------------------------
+    
+    @brand-color:           #7abcff;
+
+    @blue1:                 @brand-color;
+    @blue2:                 darken(@blue1, 15%);
+    
+    @green1:                #57c26c;
+    @green2:                darken(@green1, 15%);
+    
+    @yellow1:               #ffe362;
+    @yellow2:               darken(@yellow1, 25%);
+    
+    @red1:                  #f83f21;
+    @red2:                  darken(@red1, 15%);
+    
+    @grey0:                 #fafafa;                            @error:                 #cd0a0a;     
+    @grey1:                 darken(@grey0, 8%);                 @ui-highlight1:         @yellow1;
+    @grey2:                 darken(@grey0, 16%);                @ui-highlight2:         darken(@ui-highlight1, 25%);
+    @grey3:                 darken(@grey0, 26%);                @ui-highlight3:         darken(@ui-highlight2, 5%);
+    @grey4:                 darken(@grey0, 38%);                @ui-error1:             @red1;
+    @grey5:                 darken(@grey0, 54%);                @ui-error2:             darken(@ui-error1, 15%);
+    @grey6:                 darken(@grey0, 76%);                @ui-error3:             darken(@ui-error2, 5%);
+   
+    
+//  Link colour values --------------------------------------------------------
+
+    @link-color:            #0080ff;
+    @link-color-visited:    #8000ff;
+    @link-color-hover:      @link-color;
+    @link-color-active:     @link-color;
+    
+    
+
+//  Form elements -------------------------------------------------------------
+
+    @form-width:            @text-block;
+    @field-width:           @form-width;
+    
+    @input-padding-height:  @em/4;
+    @input-padding-width:   @block/6;
+    @text-input-padding:    @input-padding-height @input-padding-width;
+    
+    @label-width:           100%;
+    @text-input-width:      100%;
+    @label-orientation:     none; /* float value: left, right, none */
+    
+    @label-text-orientation:left;
+
+
+//  Box elements --------------------------------------------------------------
+
+    .box {
+        margin:             0 0 @line ;
+        padding:            @line @block;
+        }
+        
+    //  Use this to have block elements override the '.panel' padding.    
+    //  This is great for headings, <header> and <footer> tags.
+    .box-inset {
+        margin:             0 - @line 0 - @block;
+        padding:            @line/2 @block;
+        }
+
+//  ICONS ---------------------------------------------------------------------
+    
+    //  Icons for :before or :after & set parent element to position relative
+    
+    @icon-root:                 "../images/icons/";
+    
+    //  Arguments:
+    //  1. absolute position top (default: 0px)
+    //  2. absolute position left (default: 0px)
+    //  3. filename to icon(s) (default: jQUERY UI's icons)
+    //  4. Icon size (default: 16px)
+    
+    .icon(@postop:0, @posleft:0, @file:'ui-icons_454545_256x240.png', @icon-size:16px) {
+        position:               absolute;
+        top:                    @postop;
+        left:                   @posleft;
+        content:                "";
+        padding:                @icon-size/2;
+        background-image:       url('@{icon-root}@{file}');
+        background-repeat:      no-repeat;
+        }
+
+
+//  Basic UI elements ---------------------------------------------------------
+
+    .text-shadow(@loc, @color) {
+        text-shadow:            0 @loc @l @color;
+        }
+    .box-shadow(@x:0,@y:@l,@blur:@l,@color:fadeout(@dark-color,80%)) {
+        -moz-box-shadow:        @arguments;
+        -webkit-box-shadow:     @arguments;
+        box-shadow:             @arguments;
+        }
+    .gradient(@start,@stop){
+        background-color:       @stop;
+        background-image:       -moz-linear-gradient(top, @start 0%, @stop 100%); /* firefox */
+        background-image:       -webkit-gradient(linear, left top, left bottom, color-stop(0%,@start), color-stop(100%,@stop)); /* webkit */
+        background-image:       -ms-linear-gradient(top, @start 0%, @stop 100%); /* ie10 */
+        background-image:       linear-gradient(top, @start 0%, @stop 100%); /* w3c */
+                                // IE HACK!!
+        //filter:               e("progid:DXImageTransform.Microsoft.Gradient( StartColorStr=")@start e(", EndColorStr=")@stop e(",GradientType=0 )");/* ie */
+        }   
+    
+    .background-clip {
+        // Background clip to allow borders to blend properly with the background
+        -moz-background-clip:   padding; 
+        -webkit-background-clip:padding-box;
+        background-clip:        padding-box;
+        }
+    .rounded-corners(@r:@rad) {
+        //-moz-border-radius:     @arguments;
+        //-webkit-border-radius:  @arguments;
+        border-radius:          @arguments;
+        .background-clip;
+        }
+    .rounded-corners-top(@r:@rad) {
+        //-webkit-border-top-left-radius: @arguments;
+        //-webkit-border-top-right-radius: @arguments;
+        //-moz-border-radius-topleft: @arguments;
+        //-moz-border-radius-topright: @arguments;
+        border-top-left-radius: @arguments;
+        border-top-right-radius: @arguments;  
+        .background-clip;
+        }
+    .rounded-corners-bottom(@r:@rad) {
+        //-webkit-border-bottom-right-radius: @arguments;
+        //-webkit-border-bottom-left-radius: @arguments;
+        //-moz-border-radius-bottomright: @arguments;
+        //-moz-border-radius-bottomleft: @arguments;
+        border-bottom-right-radius: @arguments;
+        border-bottom-left-radius: @arguments;
+        .background-clip;
+        }
+        
+    .columns(@col:2) {
+        -moz-column-count:      @col; 
+        -moz-column-gap:        @w; 
+        -webkit-column-count:   @col; 
+        -webkit-column-gap:     @w; 
+        column-count:           @col; 
+        column-gap:             @w; 
+        }
+        
+    .display-box(@orient:horizontal) {
+        display:                -moz-box;
+        display:                -webkit-box;
+        -moz-box-orient:        @arguments;
+        -webkit-box-orient:     @arguments;
+        }
+    .box-flex(@flex:1) {
+        -moz-box-flex:          @arguments;
+        -webkit-box-flex:       @arguments;
+        }
+
+    .clear-fix {
+        content:                ".";
+        display:               block;
+        clear:                 both;
+        visibility:            hidden;
+        line-height:           0;
+        height:                0;
+        }
+        
+    .opacity(@alpha:0.5) {  
+        opacity:                @arguments; 
+        filter:                 e("Alpha(Opacity=")@arguments e(")");
+        }

@@ -1,0 +1,180 @@
+/*  ###########################################################################
+    Author:    DutchCelt Design
+    ########################################################################### */
+
+
+/*  RESET [based on Eric Meyer's CSS Reset v2]------------------------------------ */
+
+//  These tags have been removed to maintain stable pattern conventions
+//  pre, a, abbr, acronym, big, cite, code,
+//  del, dfn, em, ins, kbd, q, s, samp,
+//  small, strike, strong, sub, sup, tt, var,
+//  b, u, i, center
+
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, 
+    address, img,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td,
+    article, aside, canvas, details, embed, 
+    figure, figcaption, footer, header, hgroup, 
+    menu, nav, output, ruby, section, summary,
+    time, mark, audio, video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+        }
+        
+/*  HTML5 display-role reset for older browsers ------------------------------- */
+
+    article, aside, details, figcaption, figure, 
+    footer, header, hgroup, menu, nav, section {
+        display: block;
+        }
+
+
+/*  Basic front-end patterns  ------------------------------------------------- */
+
+    body {
+        font-style: normal;
+        font-weight: normal;
+        font-size: @font-scale;
+        line-height: @transport;
+        font-family: @typeface;
+        text-rendering: optimizeLegibility;
+        }
+        
+    ul, ol {
+        margin:0 0 @line @em;
+        }
+    li ul, li ol {
+        margin: 0 0 0 @em;
+        }
+    ol ol {
+        margin-left: @em*1.1;
+        list-style-type:lower-alpha;
+        }
+    ol ol ol {
+        margin-left: @em*@transport;
+        list-style-type:lower-roman;
+        }
+    dl {
+        margin:0 0 @line @em;
+        }
+    dt{ 
+        font-weight: bold;
+        }
+    dd {
+        display: list-item;
+        list-style-type:disc;
+        font-style: italic;
+        }
+        
+    p {
+        padding: 0 0 @line 0;
+        }
+
+    code {
+        display: block;
+        white-space: pre;
+        }    
+        
+    hgroup {
+        padding: 0 0 @em 0;
+        line-height: 1;
+        }
+
+    blockquote {
+        text-align: right;
+        font-style: italic;
+        }
+    blockquote:before, blockquote:after,
+    q:before, q:after {
+        content: "";
+        }
+    blockquote, q {
+        quotes: "" "";
+        }
+    
+        
+/*  headings ------------------------------------------------------------------ 
+    
+    TYPOGRAPHIC FONT SCALE:
+    6pt:    nonpareil       ->      0.6 em
+    7pt:    minion          ->      0.7 em
+    8pt:    brevier         ->      0.8 em
+    9pt:    galliard        ->      0.9 em
+    10pt:   garamond        ->        1 em / 100%
+    11pt:   small pica      ->      1.1 em
+    12pt:   pica            ->      1.2 em
+    14pt:   augustin        ->      1.4 em
+    18pt:   great primer    ->      1.8 em
+    21pt:   double pica     ->      2.1 em
+    24pt:   two-line pica   ->      2.4 em
+    36pt:   double great primer ->  3.6 em
+    
+    */
+                
+    // Added OO CSS classes to enable consistant and interchangable headings
+
+    h1, .h1 {
+        font-size:  2.4em; //two-line pica
+        }
+    h2, .h2 {
+        font-size:  2.1em; //double pica
+        }
+    h3, .h3 {
+        font-size:  1.8em; //great primer
+        }
+    h4, .h4 {
+        font-size:  1.4em; //augustin
+        }
+    h5, .h5 {
+        font-size:  1.2em; //pica
+        }
+    h6, .h6 {
+        font-size:  1.1em; //small pica
+        }
+    
+    
+/*  tables still need 'cellspacing="0"' in the markup ------------------------- */
+
+    table {
+        border-collapse: separate;
+        border-spacing: 0;
+        }
+        
+    caption, th, td {
+        padding: @h @w;
+        text-align: left;
+        vertical-align: top;
+        line-height: 1.2;
+        background: inherit;
+        }
+    th { font-weight: bold; }
+
+/*  links --------------------------------------------------------------------- */
+
+    a { 
+        text-decoration: none; 
+        color: @link-color;
+        background-repeat: no-repeat;
+        }
+    a:visited  {
+        color: @link-color-visited;
+        }
+    a:hover  { 
+        text-decoration:none; 
+        color: @link-color-hover;
+        }
+    a:active  { 
+        text-decoration:none; 
+        color: @link-color-active;
+        }
+    a:focus {
+        outline: 1;
+        }

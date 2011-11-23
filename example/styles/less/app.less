@@ -1,0 +1,99 @@
+/*  ###########################################################################
+    Author:     Lunatech Research
+    ########################################################################### */
+
+//  This LESS file is only used for this project. Each project would require
+//  its own 'app.less' file or whatever you will call it. 
+//  The 'main.less' file is where you can add as many files you want.
+
+ 
+/*  Layout */
+    
+    body { 
+        background-color: @grey0;
+        background-image: url(../images/backgrounds/back.png);
+        }
+    header .logo {
+        margin: 0 0 @line/2;
+        padding: 0;
+        .h1;
+        font-weight: normal;
+        line-height: @transport;
+        font-family: @typeface-header;
+        color: @red2;
+        background: transparent;
+        }
+    .site {
+        position: relative;
+        margin: 0 auto;
+        padding-bottom: @em*3;
+        width: 960px;
+        }
+    .site > header {
+        width: 960px;
+        height: @em*5;
+        overflow: hidden;
+        }
+    nav, footer { 
+        float: left;
+        margin: 0;
+        padding: 0 30px;
+        width: 900px;
+        color: white;
+        .gradient(@grey5,@grey6);
+        }
+    footer p { 
+        margin: 0;
+        padding: 0; 
+        text-align: center;
+        line-height: 2;
+        }
+    nav ul {
+        margin: 0;
+        display: block;
+        }
+    nav li {
+        display: inline;
+        font-size: 0.9em;
+        line-height: 2;
+        text-transform: uppercase;
+        color: @grey2;
+        .text-shadow(0 - @l, darken(@blue2, 50%));
+        }
+    nav a { 
+        color: white;
+        }
+    .help {
+        position: absolute;
+        top: 0;
+        left: 930px;
+        .rounded-corners(100%);
+        padding: 0.3em 0;
+        width: 28px;
+        text-align: center;
+        color: white;
+        background: @blue1;
+        .box-shadow();
+        cursor: pointer;
+        }
+      
+        
+/*  Messages */
+
+    .warning {
+        margin: @line 0 @em; 
+        padding: @line @w;
+        }
+    .notes {
+        float: none;
+        overflow: hidden;
+        }
+    code,
+    .notes .note {
+        color: darken(@green2,10%);
+        }
+    code strong {
+        color: @red2;
+        }
+
+
