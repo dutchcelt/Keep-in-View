@@ -14,10 +14,10 @@ Don't allow elements to scroll out of view by having them stick to the top or bo
 ### Usage
 `$("div").keepInView();`
 or
-`$("div").keepInView({`
-`   edgeOffset: 24,`
-`   zindex: 42    `
-`});`
+`$("div").keepInView({
+   edgeOffset: 24,
+   zindex: 42    
+});`
 
 ### Script options
 `fixed: false`
@@ -43,9 +43,9 @@ Caution
 - The set classname will be triggered when element scrolls out of view 
 - The Script will add a suffix of '-top' or '-bottom'
 
-`$("div").keepInView({`
-`   customClass: "sticky"`
-`});`
+`$("div").keepInView({
+   customClass: "sticky"
+});`
 
 Will render out either:
     
