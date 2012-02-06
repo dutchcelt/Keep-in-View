@@ -9,12 +9,8 @@
         <script type="text/javascript" src="../keepinview.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
-                $(".help").each(function(){
-                   $(this).keepInView({fixed:true, zindex: 42, edgeOffset: 30});
-                });
-                $("nav, footer").each(function(){
-                    $(this).keepInView();
-                });
+                $(".help").keepInView({fixed:true, zindex: 42, edgeOffset: 30});
+                $("nav, footer").keepInView();
             });
             
         </script>
