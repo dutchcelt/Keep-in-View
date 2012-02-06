@@ -89,12 +89,13 @@
                 
                 $(window).on('resize scroll', function(event){
                 
-                    if ( $elem.height()+offset.top > $(window).height() ) { return false; }
+                    if ( $elem.height() > $(window).height() ) { return false; }
                     
                     if (event.type==="resize") { 
                         $elem.removeAttr('style');
                         options.w = $elem.width();
                         options.h = $elem.height();
+                        offset = $elem.offset();
                     }
                     setElem(); 
                     
