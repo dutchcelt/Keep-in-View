@@ -54,7 +54,6 @@
                     fixCSS       =  function(t){ $elem.css({ top: t+'px' }); };
                 
                 function setElem(){
-                    console.log(options.trigger)
                     var scrolledOutAt = "";
                     if ( $(window).height() < parseInt(offset.top + $elem.outerHeight() - Math.abs($(window).scrollTop())+options.edgeOffset,10)  && !options.fixed ) { 
                         scrolledOutAt = "bottom"; 
