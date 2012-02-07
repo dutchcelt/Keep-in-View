@@ -32,7 +32,7 @@
                     //  Only trigger this script on scrolling out at the 'top', 'bottom' the default is 'both'.
                     trigger: 'both',
                     
-                    //  To be able to resize $elem via external events you will need to reset the width and height.
+                    //  Set the height and width (user can override these if necessary)
                     h : $elem.height(),
                     w : $elem.width()
                     
@@ -54,6 +54,9 @@
                     fixCSS       =  function(t){ $elem.css({ top: t+'px' }); };
                 
                 function setElem(){
+
+                    if ( $elem.height() > $(window).height() ) { return false; }
+
                     var scrolledOutAt = "";
                     if ( $(window).height() < parseInt(offset.top + $elem.outerHeight() - Math.abs($(window).scrollTop())+options.edgeOffset,10)  && !options.fixed ) { 
                         scrolledOutAt = "bottom"; 
@@ -87,11 +90,9 @@
                     }
                 }
                 
-                $(window).on('resize scroll', function(event){
-                
-                    if ( $elem.height() > $(window).height() ) { return false; }
-                    
-                    if (event.type==="resize") { 
+                $(window).on('resize scroll staysticky', function(event){
+                        
+                    if (event.type==="resize" || event.type==="staysticky") { 
                         $elem.removeAttr('style');
                         options.w = $elem.width();
                         options.h = $elem.height();
@@ -99,7 +100,7 @@
                     }
                     setElem(); 
                     
-                }).trigger('scroll');
+                }).trigger('staysticky');
                 
             });
         };
