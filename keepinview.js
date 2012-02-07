@@ -54,7 +54,10 @@
                     fixCSS       =  function(t){ $elem.css({ top: t+'px' }); };
                 
                 function setElem(){
-                   
+                
+                    //  Making sure that $elem doesn't fire if it is taller than the window (like a sidebar)
+                    //  To prevent elastic scrolling fireing set the body in css to 'overflow: hidden'.
+                    //  Then wrap your content in a div with 'overflow: auto'.
                     if ( $elem.height() > $(window).height() ) { return false; }
                     
                     var scrolledOutAt = "";
@@ -65,7 +68,7 @@
                         scrolledOutAt = "top"; 
                     }; 
                     if(!options.customClass){ 
-                       prepCSS();
+                        prepCSS();
                         if (scrolledOutAt==="bottom" && (options.trigger === 'both' || options.trigger === 'bottom')){
                             fixCSS(($(window).height()-$elem.outerHeight()-options.edgeOffset));
                         } else if (scrolledOutAt==="top" && (options.trigger === 'both' || options.trigger === 'top')){ 
