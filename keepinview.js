@@ -1,10 +1,10 @@
 /*! ###########################################################################
     Author:     Lunatech Research
                 Egor Kloos
-    date:       November 2011
+    Date:       November 2011
     git:        https://github.com/dutchcelt/Keep-in-View
     ########################################################################### */
-
+    
     (function($){
               
         $.fn.keepInView = function(settings) {
@@ -54,9 +54,9 @@
                     fixCSS       =  function(t){ $elem.css({ top: t+'px' }); };
                 
                 function setElem(){
-
+                   
                     if ( $elem.height() > $(window).height() ) { return false; }
-
+                    
                     var scrolledOutAt = "";
                     if ( $(window).height() < parseInt(offset.top + $elem.outerHeight() - Math.abs($(window).scrollTop())+options.edgeOffset,10)  && !options.fixed ) { 
                         scrolledOutAt = "bottom"; 
@@ -90,19 +90,24 @@
                     }
                 }
                 
-                $(window).on('resize scroll staysticky', function(event){
-                        
-                    if (event.type==="resize" || event.type==="staysticky") { 
-                        $elem.removeAttr('style');
-                        options.w = $elem.width();
-                        options.h = $elem.height();
-                        offset = $elem.offset();
-                    }
+                $elem.on('staysticky', function(event){
+                    $elem.removeAttr('style');
+                    options.w = $elem.width();
+                    options.h = $elem.height();
+                    offset = $elem.offset();
                     setElem(); 
-                    
-                }).trigger('staysticky');
+                });
+                
+                $(window).on('resize scroll', function(event){
+                    if(event.type==="scroll") {
+                        setElem();
+                    } else {
+                        $elem.trigger('staysticky');
+                    }
+                }).trigger('scroll');
                 
             });
         };
         
     })(jQuery);   
+        
