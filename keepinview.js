@@ -5,8 +5,20 @@
     git:        https://github.com/dutchcelt/Keep-in-View
     ########################################################################### */
     
-    (function($){
-              
+    // Uses AMD or browser globals to create a jQuery plugin.
+        
+    (function (factory) {
+    
+        if (typeof define === 'function' && define.amd) {
+            // AMD. Register as an anonymous module.
+            define(['jquery'], factory);
+        } else {
+            // Browser globals
+            factory(jQuery);
+        }
+        
+    }(function ($) {
+    
         $.fn.keepInView = function(settings) {
             
             return this.each(function() {
@@ -92,8 +104,7 @@
                         }
                     }
                 }
-                
-                var staySticky = function(){
+                var staysticky = function(){
                     $elem.removeAttr('style');
                     options.w = $elem.width();
                     options.h = $elem.height();
@@ -101,11 +112,13 @@
                     setElem(); 
                 }
                 
-                $elem.on('update', staySticky);
-                $(window).on('resize', staySticky).on('scroll load', setElem);
+                $elem.on('update', staysticky);
+                $(window).on('resize', staysticky).on('scroll load', setElem);
                 
             });
         };
         
-    })(jQuery);   
-        
+    }));
+
+
+
