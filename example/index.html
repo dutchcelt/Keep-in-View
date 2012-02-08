@@ -3,16 +3,16 @@
     <head>
         <title>Lunatech Labs - Keep in View</title>
         <link rel="stylesheet" type="text/css" media="screen" href="styles/css/main.css">
-        <style type="text/css">
-        </style>
+        <!--[if lt IE 9]>
+        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script type="text/javascript" src="../keepinview.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
                 $(".help").keepInView({fixed:true, zindex: 42, edgeOffset: 30});
-                $("nav, footer").keepInView();
+                $("nav, footer p").keepInView();
             });
-            
         </script>
     </head>
     <body>
@@ -22,10 +22,8 @@
                 <nav>
                 
                     <ul>
-                        <li class="active"><a href="example.html">Home</a> - </li>
-                        <li><a href="example">Nav item 1</a> - </li>
-                        <li><a href="example">Nav item 2</a> - </li>
-                        <li><a href="example">Nav item 3</a></li>
+                        <li class="active"><a href="index.html">Example 1</a> - </li>
+                        <li><a href="sidebar.html">Example 2</a></li>
                     </ul>
                 </nav>
                 <a class="help">?</a>
@@ -35,6 +33,15 @@
             <article class="content">
                 <h1>Too much text</h1>
                 <p><strong>Resize and scroll the window so that you can see the script keeping elements in view.</strong></p>
+                <h4>JavaScript init:</h4>
+                <code><pre>
+&lt;script type=&quot;text/javascript&quot;&gt;
+    $(document).ready(function(){
+        $(&quot;.help&quot;).keepInView({fixed:true, zindex: 42, edgeOffset: 30});
+        $(&quot;nav, footer p&quot;).keepInView();
+    });
+&lt;/script&gt;
+                </pre></code>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -47,7 +54,7 @@
             </article>
             
             <footer>
-                <p>Copyright &copy; 2011, Lunatech Research B.V. All rights reserved.</p>
+                <p>Copyright &copy; 2011-2012, C. Egor Kloos, Lunatech Research B.V. All rights reserved.</p>
             </footer>
         </div>
     </body>
