@@ -51,9 +51,9 @@
                                             zIndex:     options.zindex
                                         });
                                     },
-                    fixCSS       =  function(t){ $elem.css({ top: t+'px' }); };
+                    fixCSS       =  function(t){ $elem.css({ top: t+'px' }); }
                 
-                function setElem(){
+                var setElem = function(){
                 
                     //  Making sure that $elem doesn't fire if it is taller than the window (like a sidebar)
                     //  To prevent elastic scrolling fireing set the body in css to 'overflow: hidden'.
@@ -93,21 +93,16 @@
                     }
                 }
                 
-                $elem.on('staysticky', function(event){
+                var staySticky = function(){
                     $elem.removeAttr('style');
                     options.w = $elem.width();
                     options.h = $elem.height();
                     offset = $elem.offset();
                     setElem(); 
-                });
+                }
                 
-                $(window).on('resize scroll', function(event){
-                    if(event.type==="scroll") {
-                        setElem();
-                    } else {
-                        $elem.trigger('staysticky');
-                    }
-                }).trigger('scroll');
+                $elem.on('update', staySticky);
+                $(window).on('resize', staySticky).on('scroll load', setElem);
                 
             });
         };
