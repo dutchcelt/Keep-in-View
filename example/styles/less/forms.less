@@ -6,10 +6,12 @@
 /*  FORMS [WARNING! low specificity!]------------------------------------------ */
 
     form {
+        margin: 0;
         padding: 0 0 @em/2 0;
         max-width: 100%;  
         }
     fieldset {
+        border: 0 none;
         padding: 0 0 @em/2 0;
         }
     label {
@@ -20,11 +22,8 @@
         width: @label-width;
         text-align: @label-text-orientation;
         }
-    .input-text {   
-        border: 0 none transparent;
-        padding: @line/4 @block/8;
-        //line-height: @transport;
-        .box-shadow(0, @l, @l*3, @grey6, inset);
+    input {
+        vertical-align: baseline;
         }
     input[type=search],
     input[type=url],
@@ -35,14 +34,12 @@
     input[type=text]{
         float: @label-orientation;
         width: @text-input-width;
-        .input-text;
         }
     input[type=number],
     input[type^=date],
     input[type=time] {
         float: @label-orientation;
         width: @text-input-width*0.325;
-        .input-text;
         }
     input[type=checkbox],
     input[type=radio]{
@@ -60,11 +57,15 @@
         float: @label-orientation;
         width: auto;
         min-width: @text-input-width*0.655;
+        vertical-align: baseline;
         }
     textarea {
         float: @label-orientation;
         width: @text-input-width;
-        .input-text;
+        vertical-align: baseline;
+        font-size: inherit;
+        overflow: auto;
+        .appearance(textfield);
         }
     input[type=checkbox] {
         float: left;
@@ -75,7 +76,7 @@
         display: inline;
         }
     fieldset > div {
-        padding-bottom: @line/1.5;
+        padding-bottom: @interline/1.5;
         float: @label-orientation;
         width: 100%;
         }
@@ -87,9 +88,20 @@
         float: none;
         display: inline;
         }
+    input[type=reset],
     input[type=button],
     input[type=submit] {
+        -webkit-appearance: button;
         width: auto;
+        overflow: visible;
+        cursor: pointer;
+        }
+    input[type="search"] {
+        .appearance(textfield);
+        .box-sizing(content-box);
+        }
+    input[type="search"]::-webkit-search-decoration {
+        -webkit-appearance: none;
         }
     select[multiple]{ 
         width: @text-input-width*0.655;
@@ -107,13 +119,13 @@
     ::-webkit-validation-bubble {}
     ::-webkit-validation-bubble-arrow-clipper {}
     ::-webkit-validation-bubble-arrow {
-        margin-bottom: 0 - @line;
+        margin-bottom: 0 - @interline;
         border: 0;
         .box-shadow(0,0,0,0);
         background: @error;
         }
     ::-webkit-validation-bubble-message {
-        padding: @line/4 @block/2;
+        padding: @interline/4 @block/2;
         .rounded-corners(@w);
         border: 0;
         .box-shadow(0,0,0,0);

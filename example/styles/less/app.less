@@ -8,13 +8,24 @@
 
  
 /*  Layout */
-    
-    body { 
+
+
+    html {
+        overflow-y: scroll; 
+        }
+    body {
         background-color: @grey0;
         background-image: url(../images/backgrounds/back.png);
+        overflow:hidden; // Preventing the elastic scroll firing the sticky sidebar
+        }
+    .site {
+        position: relative;
+        padding-bottom: @em * 2;
+        min-width: 960px;
+        overflow: auto; // Fixing window scrolling disabled in body
         }
     header .logo {
-        margin: 0 0 @line/2;
+        margin: @interline/2 0 0 30px;
         padding: 0;
         .h1;
         font-weight: normal;
@@ -23,33 +34,44 @@
         color: @red2;
         background: transparent;
         }
-    .site {
+    .site > header {
         position: relative;
         margin: 0 auto;
-        padding-bottom: @em*3;
-        width: 960px;
-        }
-    .site > header {
-        width: 960px;
+        padding: @interline 0;
+        max-width: 1140px;
+        min-width: 640px;
         height: @em*5;
         overflow: hidden;
         }
-    nav, footer { 
-        float: left;
-        margin: 0;
-        padding: 0 30px;
-        width: 900px;
+    .site > footer {
+        clear: both;
+        margin: 0 auto;
+        padding: 0;
+        max-width: 1140px;
+        min-width: 640px;
+        overflow: hidden;
+        }
+    nav, footer p { 
+        margin: 0 auto;
+        padding: 0;
+        //width: 100%;
         color: white;
         .gradient(@grey5,@grey6);
         }
     footer p { 
-        margin: 0;
-        padding: 0; 
         text-align: center;
         line-height: 2;
         }
+        
+    .content {
+        margin: 0 auto;
+        padding: 0 30px;
+        max-width: 1140px - 60px;
+        min-width: 640px - 60px;
+        }
     nav ul {
         margin: 0;
+        padding: 0 30px;
         display: block;
         }
     nav li {
@@ -60,13 +82,22 @@
         color: @grey2;
         .text-shadow(0 - @l, darken(@blue2, 50%));
         }
-    nav a { 
-        color: white;
+    nav a[href] { 
+        color: @light-color;
+        }
+    nav a[href]:visited { 
+        color: @light-color;
+        }
+    nav a[href]:hover { 
+        color: @yellow2;
+        }
+    nav .active a[href] { 
+        font-weight: bold;
         }
     .help {
         position: absolute;
         top: 0;
-        left: 930px;
+        right: 15px;
         .rounded-corners(100%);
         padding: 0.3em 0;
         width: 28px;
@@ -77,12 +108,126 @@
         cursor: pointer;
         }
       
+
+    .content aside {
+        float: left;
+        position: relative;
+        padding: 0 0 @em*2;
+        width: 20%;
+        background-color: @grey1;
+        }
+    .content > div {
+        position: relative;
+        float: right;
+        padding: 0 @block @em;
+        width: 100%;
+        overflow: hidden;
+        .box-sizing(border-box);
+        }
+    .content > div p {
+        max-width: @text-block;
+        }
+    .content > aside ~ div {
+        width: 75%;
+        }
+    
+    .content aside h2 {
+        .h4;
+        line-height: 1;
+        margin: 0 0 @interline/1.5;
+        padding: @interline @block @interline/2;
+        text-transform: uppercase;
+        font-family: @typeface;
+        color: @grey4;
+        text-shadow: 0 @l 0 @grey0;
+        background-color: @grey2;
+        }
+    .content aside > ul{
+        margin: 0 @block;
+        overflow: hidden;
+        }
+
+    aside .toggle {
+        display: none;
+        }
         
+    @media screen and (color) {
+    
+        .content aside {
+            width: 25%;
+            }
+        .content > aside ~ div {
+            width: 75%;
+            }
+        .content > aside ~ div h1:after {
+                content: "(click '|<' to hide sidebar)";
+                font-style: italic;
+                font-size: 0.7em;
+                }
+        aside .toggle {
+            position: absolute;
+            right: 0;
+            top:0;
+            z-index: 42;
+            display: block;
+            width: 15%;
+            height: @interline*2.9;
+            font-size: 1.2em;
+            line-height:2.6;
+            text-align: center;
+            overflow: hidden;
+            cursor: pointer;
+            color: @grey3;
+            }
+        aside .toggle:hover {
+            border-left-color: @green2;
+            color: @dark-color;
+            .gradient(@grey2,@grey1);
+            }
+    
+        .collapsed {
+            .sidebarLeft(3%,@grey0,@light-color);
+            }
+        .collapsed aside {
+            width: 3%;
+            overflow: visible;
+            }
+        .collapsed aside .toggle {
+            text-align: left;
+            width: 100%;
+            text-indent: -40%;
+            color: @grey1;
+            overflow: hidden;
+            }
+        .collapsed aside .toggle:after {
+            float: right;
+            display: block;
+            content: ">| ";
+            color: @grey3;
+            }
+        .collapsed aside .toggle:hover:after {
+            color: @dark-color;
+            }
+        .collapsed aside h2,
+        .collapsed aside ul,
+        .collapsed aside nav {
+            display: none;
+            }
+        .collapsed > aside ~ div {
+            width: 97%;
+            }
+            
+        .content .force-resize {
+            width: 25% !important;
+            }
+
+    }
+
 /*  Messages */
 
     .warning {
-        margin: @line 0 @em; 
-        padding: @line @w;
+        margin: @interline 0 @em; 
+        padding: @interline @w;
         }
     .notes {
         float: none;

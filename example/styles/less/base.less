@@ -3,31 +3,6 @@
     ########################################################################### */
 
 
-/*  RESET [based on Eric Meyer's CSS Reset v2]------------------------------------ */
-
-//  These tags have been removed to maintain stable pattern conventions
-//  pre, a, abbr, acronym, big, cite, code,
-//  del, dfn, em, ins, kbd, q, s, samp,
-//  small, strike, strong, sub, sup, tt, var,
-//  b, u, i, center
-
-    html, body, div, span, applet, object, iframe,
-    h1, h2, h3, h4, h5, h6, p, blockquote, 
-    address, img,
-    dl, dt, dd, ol, ul, li,
-    fieldset, form, label, legend,
-    table, caption, tbody, tfoot, thead, tr, th, td,
-    article, aside, canvas, details, embed, 
-    figure, figcaption, footer, header, hgroup, 
-    menu, nav, output, ruby, section, summary,
-    time, mark, audio, video {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        font-size: 100%;
-        font: inherit;
-        vertical-align: baseline;
-        }
         
 /*  HTML5 display-role reset for older browsers ------------------------------- */
 
@@ -35,11 +10,22 @@
     footer, header, hgroup, menu, nav, section {
         display: block;
         }
+        
+    audio, canvas, video {
+        display: inline-block;
+        }
 
 
 /*  Basic front-end patterns  ------------------------------------------------- */
+    
+    html {
+        font-size: 100%;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        }
 
     body {
+        margin: 0;
         font-style: normal;
         font-weight: normal;
         font-size: @font-scale;
@@ -47,37 +33,37 @@
         font-family: @typeface;
         text-rendering: optimizeLegibility;
         }
-        
-    ul, ol {
-        margin:0 0 @line @em;
+    ul {
+        margin-left: @em;
+        padding: 0;
         }
-    li ul, li ol {
-        margin: 0 0 0 @em;
-        }
-    ol ol {
-        margin-left: @em*1.1;
-        list-style-type:lower-alpha;
-        }
-    ol ol ol {
-        margin-left: @em*@transport;
-        list-style-type:lower-roman;
+    ol {
+        margin-left: @em*1.2;
+        padding: 0;
         }
     dl {
-        margin:0 0 @line @em;
+        margin:0 0 @interline 0;
+        padding: 0;
+        }
+    dl {
+        margin:0 0 @interline 0;
+        padding: 0;
         }
     dt{ 
+        margin: 0;
         font-weight: bold;
         }
     dd {
+        margin-left: @em;
         display: list-item;
         list-style-type:disc;
         font-style: italic;
         }
         
-    p {
-        padding: 0 0 @line 0;
+    img {
+        border: 0;
+        -ms-interpolation-mode: bicubic;
         }
-
     code {
         display: block;
         white-space: pre;
@@ -99,45 +85,64 @@
     blockquote, q {
         quotes: "" "";
         }
-    
+    [hidden] {
+        display: none;
+        }
+
         
-/*  headings ------------------------------------------------------------------ 
+/*  Headings ------------------------------------------------------------------ 
     
     TYPOGRAPHIC FONT SCALE:
-    6pt:    nonpareil       ->      0.6 em
-    7pt:    minion          ->      0.7 em
-    8pt:    brevier         ->      0.8 em
-    9pt:    galliard        ->      0.9 em
-    10pt:   garamond        ->        1 em / 100%
-    11pt:   small pica      ->      1.1 em
-    12pt:   pica            ->      1.2 em
-    14pt:   augustin        ->      1.4 em
-    18pt:   great primer    ->      1.8 em
-    21pt:   double pica     ->      2.1 em
-    24pt:   two-line pica   ->      2.4 em
-    36pt:   double great primer ->  3.6 em
+    
+    6pt:    nonpareil           ->      0.6 em
+    7pt:    minion              ->      0.7 em
+    8pt:    brevier             ->      0.8 em
+    9pt:    galliard            ->      0.9 em
+    10pt:   garamond            ->        1 em / 100%
+    11pt:   small pica          ->      1.1 em
+    12pt:   pica                ->      1.2 em
+    14pt:   augustin            ->      1.4 em
+    18pt:   great primer        ->      1.8 em
+    21pt:   double pica         ->      2.1 em
+    24pt:   two-line pica       ->      2.4 em
+    36pt:   double great primer ->      3.6 em
+    
+                
+    1.  Added OO CSS classes to enable consistant and interchangable headings
+        These can be used internally via LESS to extend more cleanly 
+    2.  Setting margin to zero seems to be more usefull across typograhpic patterns
     
     */
-                
-    // Added OO CSS classes to enable consistant and interchangable headings
 
     h1, .h1 {
+        margin: 0; 
         font-size:  2.4em; //two-line pica
+        font-weight: normal;
         }
     h2, .h2 {
+        margin: 0; 
         font-size:  2.1em; //double pica
+        font-weight: normal;
         }
     h3, .h3 {
+        margin: 0; 
         font-size:  1.8em; //great primer
+        font-weight: normal;
         }
     h4, .h4 {
+        margin: 0; 
         font-size:  1.4em; //augustin
+        font-weight: normal;
         }
     h5, .h5 {
+        margin: 0; 
         font-size:  1.2em; //pica
+        font-weight: normal;
         }
     h6, .h6 {
+        margin: 0; 
         font-size:  1.1em; //small pica
+        font-weight: normal;
         }
     
     
@@ -156,25 +161,28 @@
         background: inherit;
         }
     th { font-weight: bold; }
+    
 
 /*  links --------------------------------------------------------------------- */
 
-    a { 
+    a[href] { 
         text-decoration: none; 
         color: @link-color;
         background-repeat: no-repeat;
         }
-    a:visited  {
+    a[href]:visited  {
         color: @link-color-visited;
         }
-    a:hover  { 
+    a[href]:hover  { 
         text-decoration:none; 
         color: @link-color-hover;
+        outline: 0
         }
-    a:active  { 
+    a[href]:active  { 
         text-decoration:none; 
         color: @link-color-active;
+        outline: 0
         }
     a:focus {
-        outline: 1;
+        outline: thin dotted;
         }

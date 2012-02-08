@@ -13,7 +13,7 @@
     @view:                  1200;           // VIEWPORT target based on pixels
     @w:                     @view / 100px;  // Smallest horizontal unit
     @h:                     0.2em;          // Smallest vertical unit
-    @em:                    @h*7;           // Vertical space or leading
+    @em:                    @h*7;           // Vertical space for boundries like top & bottom padding
     
     @block:                 @w * 2;         // White space for paddings or margins
     @text-block:            @view * 48%;    // alt: 52em; 
@@ -42,7 +42,7 @@
 
     @font-scale:            82.5%;          // Used on the body element
     @transport:             1.6;            // For line height (no units!)
-    @line:                  @h*5;           // Interline: For web it's usually 1em
+    @interline:             @h*5;           // Interline / leading  http://en.wikipedia.org/wiki/Interline_spacing
     @typeface:              Arial, sans-serif;
     @typeface-header:       "LobsterTwoBoldItalic", Georgia, serif;
     @typeface-brand:        "OstrichBlack", Arial, sans-serif;
@@ -71,22 +71,23 @@
     @red1:                  #f83f21;
     @red2:                  darken(@red1, 15%);
     
-    @grey0:                 #fafafa;                            @error:                 #cd0a0a;     
-    @grey1:                 darken(@grey0, 8%);                 @ui-highlight1:         @yellow1;
-    @grey2:                 darken(@grey0, 16%);                @ui-highlight2:         darken(@ui-highlight1, 25%);
-    @grey3:                 darken(@grey0, 26%);                @ui-highlight3:         darken(@ui-highlight2, 5%);
-    @grey4:                 darken(@grey0, 38%);                @ui-error1:             @red1;
-    @grey5:                 darken(@grey0, 54%);                @ui-error2:             darken(@ui-error1, 15%);
-    @grey6:                 darken(@grey0, 76%);                @ui-error3:             darken(@ui-error2, 5%);
+    @error:                 #cd0a0a;
+
+    @grey0:                 #fafafa;
+    @grey1:                 darken(@grey0, 8%);
+    @grey2:                 darken(@grey0, 16%);
+    @grey3:                 darken(@grey0, 26%);
+    @grey4:                 darken(@grey0, 38%);
+    @grey5:                 darken(@grey0, 54%);
+    @grey6:                 darken(@grey0, 76%);
    
-    
+
 //  Link colour values --------------------------------------------------------
 
     @link-color:            #0080ff;
     @link-color-visited:    #8000ff;
     @link-color-hover:      @link-color;
     @link-color-active:     @link-color;
-    
     
 
 //  Form elements -------------------------------------------------------------
@@ -108,15 +109,15 @@
 //  Box elements --------------------------------------------------------------
 
     .box {
-        margin:             0 0 @line ;
-        padding:            @line @block;
+        margin:             0 0 @interline ;
+        padding:            @interline @block;
         }
         
     //  Use this to have block elements override the '.panel' padding.    
     //  This is great for headings, <header> and <footer> tags.
     .box-inset {
-        margin:             0 - @line 0 - @block;
-        padding:            @line/2 @block;
+        margin:             0 - @interline 0 - @block;
+        padding:            @interline/2 @block;
         }
 
 //  ICONS ---------------------------------------------------------------------
@@ -159,8 +160,17 @@
         background-image:       -ms-linear-gradient(top, @start 0%, @stop 100%); /* ie10 */
         background-image:       linear-gradient(top, @start 0%, @stop 100%); /* w3c */
                                 // IE HACK!!
-        //filter:               e("progid:DXImageTransform.Microsoft.Gradient( StartColorStr=")@start e(", EndColorStr=")@stop e(",GradientType=0 )");/* ie */
+        filter:                 e("progid:DXImageTransform.Microsoft.Gradient( StartColorStr=")@start e(", EndColorStr=")@stop e(",GradientType=0 )");/* ie */
         }   
+    
+    .sidebarLeft(@width:25%,@col:@grey0,@back:@light-color){
+        background-color: @back;
+        background-image: -moz-linear-gradient(left, @col @width, @back @width);
+        background-image: -webkit-linear-gradient(left, @col @width, @back @width); /* Chrome10+,Safari5.1+ */
+        background-image: -o-linear-gradient(left, @col @width, @back @width); /* Opera 11.10+ */
+        background-image: -ms-linear-gradient(left, @col @width, @back @width); /* IE10+ */
+        background-image: linear-gradient(left, @col @width, @back @width); /* W3C */
+       }
     
     .background-clip {
         // Background clip to allow borders to blend properly with the background
@@ -169,30 +179,29 @@
         background-clip:        padding-box;
         }
     .rounded-corners(@r:@rad) {
-        //-moz-border-radius:     @arguments;
-        //-webkit-border-radius:  @arguments;
         border-radius:          @arguments;
         .background-clip;
         }
     .rounded-corners-top(@r:@rad) {
-        //-webkit-border-top-left-radius: @arguments;
-        //-webkit-border-top-right-radius: @arguments;
-        //-moz-border-radius-topleft: @arguments;
-        //-moz-border-radius-topright: @arguments;
         border-top-left-radius: @arguments;
         border-top-right-radius: @arguments;  
         .background-clip;
         }
     .rounded-corners-bottom(@r:@rad) {
-        //-webkit-border-bottom-right-radius: @arguments;
-        //-webkit-border-bottom-left-radius: @arguments;
-        //-moz-border-radius-bottomright: @arguments;
-        //-moz-border-radius-bottomleft: @arguments;
         border-bottom-right-radius: @arguments;
         border-bottom-left-radius: @arguments;
         .background-clip;
         }
-        
+    .rounded-corners-left(@r:@rad) {
+        border-top-left-radius: @arguments;
+        border-bottom-left-radius: @arguments;  
+        .background-clip;
+        }
+    .rounded-corners-right(@r:@rad) {
+        border-top-right-radius: @arguments;
+        border-bottom-right-radius: @arguments;  
+        .background-clip;
+        }
     .columns(@col:2) {
         -moz-column-count:      @col; 
         -moz-column-gap:        @w; 
@@ -212,7 +221,11 @@
         -moz-box-flex:          @arguments;
         -webkit-box-flex:       @arguments;
         }
-
+    .box-sizing(){
+        -webkit-box-sizing: @arguments; /* content-box */
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        }
     .clear-fix {
         content:                ".";
         display:               block;
@@ -224,5 +237,18 @@
         
     .opacity(@alpha:0.5) {  
         opacity:                @arguments; 
+        -ms-filter:             e("Alpha(Opacity=")@arguments e(")");
         filter:                 e("Alpha(Opacity=")@arguments e(")");
+        }
+    .transition() {
+    	-webkit-transition: @arguments;
+    	-moz-transition: @arguments;
+    	-o-transition: @arguments;
+    	-ms-transition: @arguments;
+    	transition: @arguments;
+    }
+    .appearance() {
+        -webkit-appearance:@arguments; /* Safari and Chrome */
+        -moz-appearance:@arguments; /* Firefox */
+        appearance:@arguments;
         }
