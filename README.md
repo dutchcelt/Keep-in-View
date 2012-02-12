@@ -34,11 +34,11 @@ or
 - Override z-index if you can't or don't want to set this with CSS
 - Note lowercase notation of the objectname
 
-`.trigger('update')`
+`$("div").trigger('update')`
 
 - When you element need to change in dimension like in an accordion or a toggled view the you can tell Keep in View to update the state of the element.
 
-`.trigger('unstick')`
+`$("div").trigger('unstick')`
 
 - If you no longer need the element to remain in view you can 'unstick' it via '.trigger('unstick')'.
 
