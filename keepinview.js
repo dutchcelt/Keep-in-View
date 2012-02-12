@@ -104,17 +104,21 @@
                         }
                     }
                 }
-                var staysticky = function(){
+                var staySticky = function(){
                     $elem.removeAttr('style');
                     options.w = $elem.width();
                     options.h = $elem.height();
                     offset = $elem.offset();
                     setElem(); 
                 }
+                var killSticky = function(){
+                    $elem.removeAttr('style');
+                    $(window).off('.sticky', staySticky).off('.sticky', setElem);
+                }
                 
-                $elem.on('update', staysticky);
-                $(window).on('resize', staysticky).on('scroll load', setElem);
-                
+                $elem.on('update.sticky', staySticky);
+                $elem.on('unstick.sticky', killSticky);
+                $(window).on('resize.sticky', $elem, staySticky).on('scroll.sticky', $elem, setElem).trigger('scroll');
             });
         };
         
