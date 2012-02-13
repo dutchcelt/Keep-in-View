@@ -112,7 +112,7 @@
                     setElem(); 
                 }
                 var killSticky = function(){
-                    $elem.removeAttr('style');
+                    $elem.removeAttr('style').off(".sticky");
                     $(window).off('.sticky', staySticky).off('.sticky', setElem);
                 }
                 
