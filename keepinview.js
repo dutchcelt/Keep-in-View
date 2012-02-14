@@ -91,7 +91,7 @@
                     if ( $(window).height() < parseInt(offset.top + $elem.outerHeight() - Math.abs($(window).scrollTop())+options.edgeOffset,10)  && !options.fixed ) { 
                         scrolledOutAt = "bottom"; 
                     };
-                    if ( ($(window).scrollTop())+options.edgeOffset > offset.top && !options.fixed) { 
+                    if ( ($(window).scrollTop()) > offset.top - options.edgeOffset && !options.fixed) { 
                         scrolledOutAt = "top"; 
                     }; 
                     if(!options.customClass){ 
