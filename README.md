@@ -2,7 +2,8 @@ Keep in View
 ===========
 
 Copyright &copy; 2011 - 2012, Lunatech Research B.V., C. Egor Kloos. All rights reserved.
-GNU General Public License, version 3 (GPL-3.0)
+
+###GNU General Public License, version 3 (GPL-3.0)
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
