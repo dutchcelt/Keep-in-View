@@ -16,8 +16,11 @@
     body {
         background-color: @grey0;
         background-image: url(../images/backgrounds/back.png);
+        background-position: 0 0;
+        background-attachment: fixed;
         overflow:hidden; // Preventing the elastic scroll firing the sticky sidebar
         }
+    main,
     .site {
         position: relative;
         padding-bottom: @em * 2;
@@ -68,6 +71,7 @@
         padding: 0 30px;
         max-width: 1140px - 60px;
         min-width: 640px - 60px;
+        .box-sizing(border-box);
         }
     nav ul {
         margin: 0;
@@ -111,13 +115,14 @@
 
     .content aside {
         float: left;
-        position: relative;
+        margin-left: -30px;
         padding: 0 0 @em*2;
         width: 20%;
         background-color: @grey1;
+        .box-sizing(border-box);
         }
     .content > div {
-        position: relative;
+        //position: relative;
         float: right;
         padding: 0 @block @em;
         width: 100%;
@@ -141,6 +146,7 @@
         color: @grey4;
         text-shadow: 0 @l 0 @grey0;
         background-color: @grey2;
+        .box-sizing(border-box);
         }
     .content aside > ul{
         margin: 0 @block;
@@ -160,7 +166,7 @@
             width: 75%;
             }
         .content > aside ~ div h1:after {
-                content: "(click '|<' to hide sidebar)";
+                //content: "(click '|<' to hide sidebar)";
                 font-style: italic;
                 font-size: 0.7em;
                 }
@@ -241,4 +247,25 @@
         color: @red2;
         }
 
+
+    .KIV-cloned {
+        background-color: #ffffff;
+        background-image: url(../images/backgrounds/back.png);
+        background-position: 0 0;
+        background-attachment: fixed;
+        border-bottom: 1px solid @grey1;
+        &::after{
+            position: absolute;
+            content: " ";
+            z-index: -1;
+            bottom: -0.3em;
+            left: 0;
+            width: 100%;
+            height:0.3em;
+            background-image: -webkit-radial-gradient(50% -100%, ellipse cover, rgba(0,0,0,0.5), rgba(0,0,0,0.0) 75%);
+            background-image: -moz-radial-gradient(50% -100%, ellipse cover, rgba(0,0,0,0.5), rgba(0,0,0,0.0) 75%);
+            background-image: -ms-radial-gradient(50% -100%, ellipse cover, rgba(0,0,0,0.5), rgba(0,0,0,0.0) 75%);
+            background-image: radial-gradient(50% -100%, ellipse cover, rgba(0,0,0,0.5), rgba(0,0,0,0.0) 75%);
+            }
+        }
 

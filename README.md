@@ -1,9 +1,14 @@
 Keep in View
-===========
+============
 
+<<<<<<< HEAD
 Copyright &copy; 2011 - 2012, Lunatech Research B.V., C. Egor Kloos. All rights reserved.
 
 ###GNU General Public License, version 3 (GPL-3.0)
+=======
+Copyright &copy; 2011 - 2013, Lunatech Research B.V., C. Egor Kloos. All rights reserved.
+GNU General Public License, version 3 (GPL-3.0)
+>>>>>>> Added the ability for sticky elements to be cloned and or scrollable. See third example.
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
@@ -18,7 +23,7 @@ Don't allow elements to scroll out of view by having them stick to the top or bo
 
 ### Dependencies
 
-- jQuery (tested with 1.7)
+- jQuery (tested with 2.0.1)
 
 
 ### Usage

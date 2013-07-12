@@ -224,10 +224,10 @@
         -moz-box-flex:          @arguments;
         -webkit-box-flex:       @arguments;
         }
-    .box-sizing(){
+    .box-sizing(@arguments){
         -webkit-box-sizing: @arguments; /* content-box */
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
+        -moz-box-sizing: @arguments;
+        box-sizing: @arguments;
         }
     .clear-fix {
         content:                ".";
@@ -250,7 +250,7 @@
     	-ms-transition: @arguments;
     	transition: @arguments;
     }
-    .appearance() {
+    .appearance(@arguments) {
         -webkit-appearance:@arguments; /* Safari and Chrome */
         -moz-appearance:@arguments; /* Firefox */
         appearance:@arguments;
