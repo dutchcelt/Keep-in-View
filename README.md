@@ -1,14 +1,9 @@
 Keep in View
 ============
 
-<<<<<<< HEAD
-Copyright &copy; 2011 - 2012, Lunatech Research B.V., C. Egor Kloos. All rights reserved.
-
-###GNU General Public License, version 3 (GPL-3.0)
-=======
 Copyright &copy; 2011 - 2013, Lunatech Research B.V., C. Egor Kloos. All rights reserved.
-GNU General Public License, version 3 (GPL-3.0)
->>>>>>> Added the ability for sticky elements to be cloned and or scrollable. See third example.
+
+### GNU General Public License, version 3 (GPL-3.0)
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
@@ -56,6 +51,14 @@ or
 `$("div").trigger('unstick')`
 
 - If you no longer need the element to remain in view you can 'unstick' it via '.trigger('unstick')'.
+
+`scrollable: false`
+
+- Allow the element to have an scrollbar. This will automatically resize itself. See example 3.
+
+`cloned: false`
+
+- This will clone your element so that the content doesn't reflow causing the page scroll to jump. See example 3.
 
 
 Caution
