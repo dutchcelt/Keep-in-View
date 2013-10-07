@@ -2,7 +2,7 @@
     
     Source: https://github.com/dutchcelt/Keep-in-View
     
-    Copyright (C) 2011 - 2012,  Lunatech Labs B.V., C. Egor Kloos. All rights reserved.
+    Copyright (C) 2011 - 2013,  Lunatech Labs B.V., C. Egor Kloos. All rights reserved.
     GNU General Public License, version 3 (GPL-3.0)
     
     This program is free software: you can redistribute it and/or modify
@@ -34,13 +34,20 @@
         
     }(function ($) {
     
-        $.fn.keepInView = function( settings ) {
+        $.fn.keepInView = function(settings) {
             
             return this.each(function( index, stickyElem ) {
             
-                var $elem = $( stickyElem );
+                var $elem;
                 var $parent;
-
+                
+                if( settings.cloned ){
+                    $parent = $( stickyElem ).parents().eq(0);
+                    $elem = $( stickyElem ).clone().prependTo( $parent ).hide().addClass( "KIV-cloned" );
+                } else {
+                    $elem = $( stickyElem );
+                }
+                
                 var defaults = {
                 
                     // Position will be fixed regardless of scroll position when set to true 
@@ -79,14 +86,8 @@
                       
                 };
                        
-                var options      =  $.extend( {}, defaults, settings );
-
-                if( options.cloned ){
-                    $parent = $( stickyElem ).parents().eq(0);
-                    $elem = $( stickyElem ).clone().prependTo( $parent ).hide().addClass( "KIV-cloned" ).hide();
-                }
-
-                var offset       =  $( stickyElem ).offset(),
+                var options      =  $.extend({},defaults, settings),
+                    offset       =  $( stickyElem ).offset(),
                     position     =  $( stickyElem ).css('position'),
                     leftPosition =  $( stickyElem ).css('left'),
                     marginOffset =  ( leftPosition === "auto" ) ? parseInt( $( stickyElem ).css( 'marginLeft' ), 10 ) : 0,
@@ -102,17 +103,34 @@
                                     },
                     fixCSS       =  function(t){ 
                                         $elem.css({ top: t+'px' });
-                                        if( options.cloned ) { 
+                                        if( options.offsetAnchor ) { 
                                             $( stickyElem ).css({ visibility: "hidden" }); 
-                                            $elem.show(); 
+                                            $elem.slideDown("normal"); 
                                         }
                                     }
-                
 
                 if( options.offsetAnchor ){
-                    $( "a[name]" ).each( function( index, anchorElem ){
-                        $( anchorElem ).css({ position: "relative", display: "block", top: "-" + $elem.outerHeight() + "px" });
-                    });
+                    
+                    // It is possible that there a lot of anchors!
+                    // Using an array instead of a loop by 'shifting' the array   
+                    // This speeds up the iterations and setTimeout prevents the browser from locking up. 
+                    
+                    // put all the dom elements collected by jQuery in to an array
+                    var $anchors = $( "a[name]" );
+                    var anchorArray = $.makeArray( $anchors ); 
+                                        
+                    var arrayShifter = function(){
+
+                        var anchor = anchorArray.shift();
+                        
+                        $( anchor ).css({ position: "relative", display: "block", top: "-" + $elem.outerHeight() + "px" });    
+                                    
+                        if ( anchorArray[0] !== void 0 ){
+                            setTimeout( arrayShifter, 0 );
+                        } 
+                        
+                    };
+                    arrayShifter();
                 }
                 
                 var setElem = function(){
@@ -124,7 +142,7 @@
                     if ( $elem.height() > $(window).height() && !options.scrollable) { return false; }
                     
                     var scrolledOutAt = "";
-                    var windowHeight = $( window ).height();
+                    var windowHeight = $(window).height();
                     var outerHeight = $elem.outerHeight();
                     if ( windowHeight < parseInt(offset.top + outerHeight - Math.abs($(window).scrollTop())+options.edgeOffset,10)  && !options.fixed ) { 
                         scrolledOutAt = "bottom"; 
@@ -159,12 +177,11 @@
                             $elem.css({top:options.edgeOffset,left:offset.left,height:"auto"});
                         } else {
                             if(options.scrollable) {
-                            console.log(offset.top);
                                 $elem.css({position:position,top:offset.top+"px",height:(windowHeight-offset.top+$(window).scrollTop())+"px"});
                             } else {
-                                if( options.cloned ) { 
+                                if( options.offsetAnchor ) { 
                                     $( stickyElem ).css({ visibility: "visible" }); 
-                                    $elem.hide();
+                                    $elem.hide(); 
                                 } else {
                                     $elem.removeAttr('style');
                                 }
