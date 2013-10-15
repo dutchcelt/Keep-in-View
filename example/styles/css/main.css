@@ -676,13 +676,17 @@ code strong {
   color: #c62106;
 }
 .KIV-cloned {
+  display: none;
+}
+.KIV-cloned[style*='fixed'] {
+  display: block;
   background-color: #ffffff;
   background-image: url(../images/backgrounds/back.png);
   background-position: 0 0;
   background-attachment: fixed;
   border-bottom: 1px solid #e6e6e6;
 }
-.KIV-cloned::after {
+.KIV-cloned[style*='fixed']::after {
   position: absolute;
   content: " ";
   z-index: -1;
