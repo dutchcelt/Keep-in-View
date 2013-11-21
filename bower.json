@@ -1,0 +1,25 @@
+{
+  "name": "Keep-in-View",
+  "version": "2.0.0",
+  "homepage": "https://github.com/dutchcelt/Keep-in-View",
+  "description": "Don't allow elements to scroll out of view by having them stick to the top or bottom of a window.",
+  "main": "keepinview.js",
+  "keywords": [
+    "jQuery",
+    "javascript",
+    "UI",
+    "plugin"
+  ],
+  "authors": [
+    "C. Egor Kloos"
+  ],
+  "license": "GPL-3",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -22,232 +22,232 @@
 
 // Uses AMD or browser globals to create a jQuery plugin.
 
-(function (factory) {
+(function( factory ){
 
-    if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define(['jquery'], factory);
-    } else {
-        // Browser globals
-        factory(jQuery);
-    }
+	if( typeof define === 'function' && define.amd ){
+		// AMD. Register as an anonymous module.
+		define( ['jquery'], factory );
+	} else {
+		// Browser globals
+		factory( jQuery );
+	}
 
-}(function ($) {
+}( function( $ ){
 
-    $.fn.keepInView = function (settings) {
+	$.fn.keepInView = function( settings ){
 
-        return this.each(function (index, stickyElem) {
+		return this.each( function( index, stickyElem ){
 
-            var $elem;
-            var $parent;
+			var $elem;
+			var $parent;
 
-            var defaults = {
+			var defaults = {
 
-                // Position will be fixed regardless of scroll position when set to true
-                fixed: false,
+				// Position will be fixed regardless of scroll position when set to true
+				fixed:        false,
 
-                // Vertical offset that applies to both top and bottom;
-                edgeOffset: 0,
+				// Vertical offset that applies to both top and bottom;
+				edgeOffset:   0,
 
-                // Override z-index if you can't or don't want to set this with CSS
-                zindex: $(stickyElem).css('zIndex'),
+				// Override z-index if you can't or don't want to set this with CSS
+				zindex:       $( stickyElem ).css( 'zIndex' ),
 
-                // Override all scripted positions with your own custom CSS classname
-                // The set classname will be triggered when element scrolls out of view
-                // The Script will add a suffix of '-top' or '-bottom'
-                customClass: false,
+				// Override all scripted positions with your own custom CSS classname
+				// The set classname will be triggered when element scrolls out of view
+				// The Script will add a suffix of '-top' or '-bottom'
+				customClass:  false,
 
-                //  Only trigger this script on scrolling out at the 'top', 'bottom' the default is 'both'.
-                trigger: 'both',
+				//  Only trigger this script on scrolling out at the 'top', 'bottom' the default is 'both'.
+				trigger:      'both',
 
-                // Scrollable box
-                scrollable: false,
+				// Scrollable box
+				scrollable:   false,
 
-                //  Set the height and width (user can override these if necessary)
-                h: $(stickyElem).height(),
-                w: $(stickyElem).width(),
+				//  Set the height and width (user can override these if necessary)
+				h:            $( stickyElem ).height(),
+				w:            $( stickyElem ).width(),
 
-                //  If a pageload scrolls to a hash you can use this to offset anchors if the 'sticky' element is covering the anchored content
-                //  Beware that if the anchor itself contains content that it will also move up the page.
-                //  This feature is best used with the clone feature below.
-                offsetAnchor: false, // boolean.
+				//  If a pageload scrolls to a hash you can use this to offset anchors if the 'sticky' element is covering the anchored content
+				//  Beware that if the anchor itself contains content that it will also move up the page.
+				//  This feature is best used with the clone feature below.
+				offsetAnchor: false, // boolean.
 
-                //  Clone the sticky element and prepend to its parent.
-                //  Beware that the original item is not removed from the page so make sure that the cloned element will cover it.
-                //  The cloned item can be styled via the classname "KIV-cloned"
-                cloned: false // boolean.
+				//  Clone the sticky element and prepend to its parent.
+				//  Beware that the original item is not removed from the page so make sure that the cloned element will cover it.
+				//  The cloned item can be styled via the classname "KIV-cloned"
+				cloned:       false // boolean.
 
-            };
+			};
 
-            var options = $.extend({}, defaults, settings);
-            
-            if (options.cloned) {
-                $parent = $(stickyElem).parents().eq(0);
-                $elem = $(stickyElem).clone().prependTo($parent).hide().addClass("KIV-cloned");
-                $(stickyElem).addClass("KIV-original")
-            } else {
-                $elem = $(stickyElem);
-            }
-            
-            var offset = $(stickyElem).offset(),
-                position = $(stickyElem).css('position'),
-                leftPosition = $(stickyElem).css('left'),
-                marginOffset = ( leftPosition === "auto" ) ? parseInt($(stickyElem).css('marginLeft'), 10) : 0,
-                cssObject = (function () {
-                    return {
-                        position: 'fixed',
-                        left: leftPosition - marginOffset + 'px',
-                        width: (options.scrollable) ? options.w - 15 : options.w,
-                        height: (options.scrollable) ? ($(window).height() - offset.top) + "px" : options.h,
-                        zIndex: options.zindex
-                    }
-                })(),
-                prepCSS = function (cssSettings) {
-                    $elem.css($.extend({}, cssObject, cssSettings));
-                },
-                fixCSS = function (t) {
-                    $elem.css({ top: t + 'px' });
-                    if (options.offsetAnchor) {
-                        $(stickyElem).css({ visibility: "hidden" });
-                        $elem.slideDown("normal");
-                    }
-                }
-            
-            if (options.offsetAnchor) {
+			var options = $.extend( {}, defaults, settings );
 
-                // It is possible that there a lot of anchors!
-                // Using an array instead of a loop by 'shifting' the array
-                // This speeds up the iterations and setTimeout prevents the browser from locking up.
+			if( options.cloned ){
+				$parent = $( stickyElem ).parents().eq( 0 );
+				$elem = $( stickyElem ).clone().prependTo( $parent ).hide().addClass( "KIV-cloned" );
+				$( stickyElem ).addClass( "KIV-original" )
+			} else {
+				$elem = $( stickyElem );
+			}
 
-                // put all the dom elements collected by jQuery in to an array
-                var $anchors = $("a[name]");
-                var anchorArray = $.makeArray($anchors);
+			var offset = $( stickyElem ).offset(),
+				position = $( stickyElem ).css( 'position' ),
+				leftPosition = $( stickyElem ).css( 'left' ),
+				marginOffset = ( leftPosition === "auto" ) ? parseInt( $( stickyElem ).css( 'marginLeft' ), 10 ) : 0,
+				cssObject = (function(){
+					return {
+						position: 'fixed',
+						left: leftPosition - marginOffset + 'px',
+						width: (options.scrollable) ? options.w - 15 : options.w,
+						height: (options.scrollable) ? ($( window ).height() - offset.top) + "px" : options.h,
+						zIndex:   options.zindex
+					}
+				})(),
+				prepCSS = function( cssSettings ){
+					$elem.css( $.extend( {}, cssObject, cssSettings ) );
+				},
+				fixCSS = function( t ){
+					$elem.css( { top: t + 'px' } );
+					if( options.offsetAnchor ){
+						$( stickyElem ).css( { visibility: "hidden" } );
+						$elem.slideDown( "normal" );
+					}
+				}
 
-                var arrayShifter = function () {
+			if( options.offsetAnchor ){
 
-                    var start = +new Date();
+				// It is possible that there a lot of anchors!
+				// Using an array instead of a loop by 'shifting' the array
+				// This speeds up the iterations and setTimeout prevents the browser from locking up.
 
-                    do {
+				// put all the dom elements collected by jQuery in to an array
+				var $anchors = $( "a[name]" );
+				var anchorArray = $.makeArray( $anchors );
 
-                        var anchor = anchorArray.shift();
-                        //  Invoke lazyLoad method with the current item
-                        if ( anchorArray[0] !== void 0 ) {
-                            $(anchor).css({ position: "relative", display: "block", top: "-" + $elem.outerHeight() + "px" });
-                        }
+				var arrayShifter = function(){
 
-                    } while ( anchorArray[0] !== void 0 && (+new Date() - start < 50)); // increase to 100ms if needed.
+					var start = +new Date();
 
-                    if (anchorArray[0] !== void 0) {
-                        setTimeout(arrayShifter, 0);
-                    }
+					do {
 
-                };
-                arrayShifter();
-            }
+						var anchor = anchorArray.shift();
+						//  Invoke lazyLoad method with the current item
+						if( anchorArray[0] !== void 0 ){
+							$( anchor ).css( { position: "relative", display: "block", top: "-" + $elem.outerHeight() + "px" } );
+						}
+
+					} while( anchorArray[0] !== void 0 && (+new Date() - start < 50) ); // increase to 100ms if needed.
+
+					if( anchorArray[0] !== void 0 ){
+						setTimeout( arrayShifter, 0 );
+					}
+
+				};
+				arrayShifter();
+			}
 
 
-            var setElem = function ( opts ) {
+			var setElem = function( opts ){
 
-                //  Making sure that $elem doesn't fire if it is taller than the window (like a sidebar)
-                //  To prevent elastic scrolling fireing set the body in css to 'overflow: hidden'.
-                //  Then wrap your content in a div with 'overflow: auto'.
+				//  Making sure that $elem doesn't fire if it is taller than the window (like a sidebar)
+				//  To prevent elastic scrolling fireing set the body in css to 'overflow: hidden'.
+				//  Then wrap your content in a div with 'overflow: auto'.
 
-                if ($elem.height() > $(window).height() && !options.scrollable) {
-                    return false;
-                }
+				if( $elem.height() > $( window ).height() && !options.scrollable ){
+					return false;
+				}
 
-                if( options.clearStyle ){
-                    $elem.removeAttr("style");
-                }
-                var scrolledOutAt = "";
-                var windowHeight = $(window).height();
-                var outerHeight = $elem.outerHeight();
-                if (windowHeight < parseInt(offset.top + outerHeight - Math.abs($(window).scrollTop()) + options.edgeOffset, 10) && !options.fixed) {
-                    scrolledOutAt = "bottom";
-                }
+				if( options.clearStyle ){
+					$elem.removeAttr( "style" );
+				}
+				var scrolledOutAt = "";
+				var windowHeight = $( window ).height();
+				var outerHeight = $elem.outerHeight();
+				if( windowHeight < parseInt( offset.top + outerHeight - Math.abs( $( window ).scrollTop() ) + options.edgeOffset, 10 ) && !options.fixed ){
+					scrolledOutAt = "bottom";
+				}
 
-                if (($(window).scrollTop()) > offset.top - options.edgeOffset && !options.fixed) {
-                    scrolledOutAt = "top";
-                }
+				if( ($( window ).scrollTop()) > offset.top - options.edgeOffset && !options.fixed ){
+					scrolledOutAt = "top";
+				}
 
-                if (!options.customClass) {
+				if( !options.customClass ){
 
-                    if (options.scrollable) {
-                        prepCSS({height: (windowHeight - offset.top) + "px", overflow: "auto"});
-                    } else {
-                        prepCSS();
+					if( options.scrollable ){
+						prepCSS( {height: (windowHeight - offset.top) + "px", overflow: "auto"} );
+					} else {
+						prepCSS();
 
-                    }
+					}
 
-                    if (scrolledOutAt === "bottom" && (options.trigger === 'both' || options.trigger === 'bottom') && options.scrollable) {
-                        if (options.scrollable) {
-                            prepCSS({height: windowHeight + "px", top: (windowHeight - outerHeight - options.edgeOffset) + "px", overflow: "auto" });
-                        } else {
-                            fixCSS((windowHeight - outerHeight - options.edgeOffset));
-                        }
+					if( scrolledOutAt === "bottom" && (options.trigger === 'both' || options.trigger === 'bottom') && options.scrollable ){
+						if( options.scrollable ){
+							prepCSS( {height: windowHeight + "px", top: (windowHeight - outerHeight - options.edgeOffset) + "px", overflow: "auto" } );
+						} else {
+							fixCSS( (windowHeight - outerHeight - options.edgeOffset) );
+						}
 
-                    } else if (scrolledOutAt === "top" && (options.trigger === 'both' || options.trigger === 'top')) {
-                        if (options.scrollable) {
-                            prepCSS({ height: windowHeight + "px", top: options.edgeOffset + "px", overflow: "auto" });
-                        } else {
-                            fixCSS(options.edgeOffset);
-                        }
+					} else if( scrolledOutAt === "top" && (options.trigger === 'both' || options.trigger === 'top') ){
+						if( options.scrollable ){
+							prepCSS( { height: windowHeight + "px", top: options.edgeOffset + "px", overflow: "auto" } );
+						} else {
+							fixCSS( options.edgeOffset );
+						}
 
-                    } else if (options.fixed) {
-                        $elem.css({top: options.edgeOffset, left: offset.left, height: "auto"});
-                    } else {
-                        if (options.scrollable) {
-                            $elem.css({position: position, top: offset.top + "px", height: (windowHeight - offset.top + $(window).scrollTop()) + "px"});
-                        } else {
-                            if (options.offsetAnchor) {
-                                $(stickyElem).css({ visibility: "visible" });
-                                $elem.hide();
-                            } else {
-                                $elem.removeAttr('style');
-                            }
-                        }
-                    }
+					} else if( options.fixed ){
+						$elem.css( {top: options.edgeOffset, left: offset.left, height: "auto"} );
+					} else {
+						if( options.scrollable ){
+							$elem.css( {position: position, top: offset.top + "px", height: (windowHeight - offset.top + $( window ).scrollTop()) + "px"} );
+						} else {
+							if( options.offsetAnchor ){
+								$( stickyElem ).css( { visibility: "visible" } );
+								$elem.hide();
+							} else {
+								$elem.removeAttr( 'style' );
+							}
+						}
+					}
 
-                } else if (options.customClass) {
-                    if (options.trigger === 'both') {
-                        if (scrolledOutAt === "bottom" || scrolledOutAt === "top") {
-                            $elem.addClass(options.customClass + "-" + scrolledOutAt);
-                        } else if (!scrolledOutAt) {
-                            $elem.removeClass(options.customClass + "-top").removeClass(options.customClass + "-bottom");
-                        }
-                    } else if (scrolledOutAt === options.trigger) {
-                        $elem.addClass(options.customClass + "-" + options.trigger);
-                    } else if (!scrolledOutAt) {
-                        $elem.removeClass(options.customClass + "-" + options.trigger);
-                    }
-                }
-            }
+				} else if( options.customClass ){
+					if( options.trigger === 'both' ){
+						if( scrolledOutAt === "bottom" || scrolledOutAt === "top" ){
+							$elem.addClass( options.customClass + "-" + scrolledOutAt );
+						} else if( !scrolledOutAt ){
+							$elem.removeClass( options.customClass + "-top" ).removeClass( options.customClass + "-bottom" );
+						}
+					} else if( scrolledOutAt === options.trigger ){
+						$elem.addClass( options.customClass + "-" + options.trigger );
+					} else if( !scrolledOutAt ){
+						$elem.removeClass( options.customClass + "-" + options.trigger );
+					}
+				}
+			}
 
-            var staySticky = function () {
-                options.w = $elem.width();
-                options.h = $elem.height();
-                offset = $elem.offset();
-                options.clearStyle = true;
-                requestAnimationFrame(setElem);
-            }
-            var setElemRequest = function () {
-                options.clearStyle = false;
-                requestAnimationFrame(setElem);
-            }
+			var staySticky = function(){
+				options.w = $elem.width();
+				options.h = $elem.height();
+				offset = $elem.offset();
+				options.clearStyle = true;
+				requestAnimationFrame( setElem );
+			}
+			var setElemRequest = function(){
+				options.clearStyle = false;
+				requestAnimationFrame( setElem );
+			}
 
-            var killSticky = function () {
-                $elem.removeAttr('style').off(".sticky");
-                $(window).off('.sticky', staySticky).off('.sticky', setElemRequest );
-            }
+			var killSticky = function(){
+				$elem.removeAttr( 'style' ).off( ".sticky" );
+				$( window ).off( '.sticky', staySticky ).off( '.sticky', setElemRequest );
+			}
 
-            $elem.on('update.sticky', staySticky);
-            $elem.on('unstick.sticky', killSticky);
-            $(window).on('resize.sticky', $elem, staySticky).on('scroll.sticky', $elem, setElemRequest ).trigger('scroll');
+			$elem.on( 'update.sticky', staySticky );
+			$elem.on( 'unstick.sticky', killSticky );
+			$( window ).on( 'resize.sticky', $elem, staySticky ).on( 'scroll.sticky', $elem, setElemRequest ).trigger( 'scroll' );
 
-        });
-    };
+		} );
+	};
 
-}));
+} ));
 
 
 
