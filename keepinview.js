@@ -179,7 +179,7 @@
 
 					}
 
-					if( scrolledOutAt === "bottom" && (options.trigger === 'both' || options.trigger === 'bottom') && options.scrollable ){
+					if( scrolledOutAt === "bottom" && (options.trigger === 'both' || options.trigger === 'bottom') ){
 						if( options.scrollable ){
 							prepCSS( {height: windowHeight + "px", top: (windowHeight - outerHeight - options.edgeOffset) + "px", overflow: "auto" } );
 						} else {
