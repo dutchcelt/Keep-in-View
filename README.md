@@ -12,6 +12,11 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program.  
 If not, see http://www.opensource.org/licenses/gpl-3.0.html
 
+### New version
+I've created a new version of this script for my Front-end Patterns 2 project witch is currently under development.
+This new version only works in IE9 and higher and no longer requires jQuery.
+https://github.com/dutchcelt/FEP-KeepInView
+
 
 ### Description
 Don't allow elements to scroll out of view by having them stick to the top or bottom of a window.
