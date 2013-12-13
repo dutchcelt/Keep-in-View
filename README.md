@@ -13,8 +13,8 @@ You should have received a copy of the GNU General Public License along with thi
 If not, see http://www.opensource.org/licenses/gpl-3.0.html
 
 ### New version
-I've created a new version of this script for my Front-end Patterns 2 project witch is currently under development.
-This new version only works in IE9 and higher and no longer requires jQuery.
+I've created a new version of this script for my Front-end Patterns 2 project which is currently under development.
+This new version doesn't work in IE8 or lower and because of this it no longer requires jQuery to run.
 https://github.com/dutchcelt/FEP-KeepInView
 
 
